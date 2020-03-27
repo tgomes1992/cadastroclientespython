@@ -2,7 +2,6 @@ import csv
 import os
 import datetime
 import sqlite3
-	
 
 #mapa
 #Cadastra
@@ -16,12 +15,11 @@ class Clientes():
     def __init__(self):
         print("Construtor Cliente")
     def novo_cliente(self):
-        self.name = str(input("Digite o nome do cliente: "))
+        self.name = "Teste"
         self.endereco = "Teste"
         self.idade = '28'
         self.nascimento = "teste"
         self.telefone = "teste"
-
 
 class BancoClientes(Clientes):
     def __init__(self):
@@ -31,12 +29,11 @@ class BancoClientes(Clientes):
         Clientes.novo_cliente(self)
         self.curs.execute('''INSERT into clientes values (?,?,?,?,?)''',(self.name,self.endereco,self.idade,self.nascimento,self.telefone))
     def deletar_dados(self):
-        self.curs.execute('''DELETE FROM clientes WHERE Telefone="24035621" ''')
+        self.curs.execute('''DELETE FROM clientes WHERE Endereço="Teste" ''')
     def close_connection(self):
         self.conection.close()
     def commit_changes(self):
         self.conection.commit()
-
 
 def desejodecadastro():
     print("Deseja Cadastrar um novo cliente: ")
@@ -52,28 +49,25 @@ def desejodecadastro():
         return desejodecadastro()
 
 def write_csv():
-    # csv_header = ["Nome","Endereço", "Idade","Nascimento" ,"Telefone"]
-    csv_file = open("Clientes Cadastrados.csv","w",newline="")
+    csv_name = ("Clientes Cadastrados-" + now.strftime("%d %b  %H-%M-%S")+".csv")
+    csv_header = ["Nome","Endereço", "Idade","Nascimento" ,"Telefone"]
+    csv_file = open(os.path.join("C:/Users/thiag/Desktop/Cadastro de Clientes Python/Log",csv_name) +".csv","w",newline="")
     writer = csv.writer(csv_file,delimiter=";")
-    # writer.writerow(csv_header)
+    writer.writerow(csv_header)
     writer.writerows(new_csv)
     print (new_csv)
+
 
 
 while desejodecadastro():
     Banco = BancoClientes()
     Banco.inserir_cliente()
+    csv_row =[Banco.name,Banco.endereco,Banco.idade , Banco.nascimento,Banco.telefone]
     #Banco.deletar_dados()
     Banco.commit_changes()
     Banco.close_connection()
-    #csv_row =[cliente.name,cliente.endereco,cliente.idade , cliente.nascimento,cliente.telefone]
+    new_csv.append(csv_row)
 
-
-
-
-#new_csv.append(csv_row)
-
-#write_csv()
-
+write_csv()
 
 
