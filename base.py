@@ -58,7 +58,6 @@ def write_csv():
     print (new_csv)
 
 
-
 while desejodecadastro():
     Banco = BancoClientes()
     Banco.inserir_cliente()
