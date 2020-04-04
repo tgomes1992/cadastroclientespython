@@ -15,11 +15,11 @@ class Clientes():
     def __init__(self):
         print("Construtor Cliente")
     def novo_cliente(self):
-        self.name = "Teste"
-        self.endereco = "Teste"
-        self.idade = '28'
-        self.nascimento = "teste"
-        self.telefone = "teste"
+        self.name = input("Digite o Nome Completo do Cliente: ")
+        self.endereco = input("Digite o endereço atual do Cliente: ")
+        self.idade = input("Digite a idade do cliente: ")
+        self.nascimento = input("Digite a data de Nascimento do Cliente: ")
+        self.telefone = input("Digite o Telefone do Cliente: ")
 
 class BancoClientes(Clientes):
     def __init__(self):
